@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&amp;family=Playfair+Display:ital@0;1&amp;display=swap" rel="stylesheet">
@@ -18,14 +19,21 @@
       font-weight: 400;
     }
     .mortgage-calc-container{
-      display: grid;
-      grid-template-columns: 40% 60%;
-      grid-gap: 2rem;
       max-width: 1024px;
       margin: auto;
-      padding: 4rem;
+      padding: 2rem 1rem;
       background-color: #eee;
     }
+
+    @media screen and (min-width: 1024px){
+      .mortgage-calc-container{
+        display: grid;
+        grid-template-columns: 40% 60%;
+        grid-gap: 2rem;
+        padding: 4rem;
+      }
+    }
+
     .fixed-values{
       list-style: none;
       display: flex;
@@ -62,9 +70,18 @@
       margin-bottom: .5rem;
       font-size: .75rem;
     }
+
     .mortgage-calc-results-panel{
-      display: flex;
-      flex-wrap: wrap;
+      margin-top: 4rem;
+    }
+
+
+    @media screen and (min-width: 1024px){
+      .mortgage-calc-results-panel{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+      }
     }
 
     .mortgage-calc-results-panel h3{
@@ -74,19 +91,42 @@
       font-weight: 400;
     }
     .monthly-payment-chart{
-      width: 70%;
+      margin: 0;
       padding: 1rem 2rem;
     }
+
+    @media screen and (min-width: 1024px){
+      .monthly-payment-chart{
+        width: 70%;
+      }
+    }
+
     .monthly-payment-chart canvas{
       width: 90%;
     }
+
     .monthly-payment-legend{
-      width: 30%;
+        width: 60%;
+        margin: auto;
+    }
+
+    @media screen and (min-width: 1024px){
+      .monthly-payment-legend{
+        width: 30%;
+        margin: 0;
+      }
+
     }
     .monthly-payment-values{
       list-style: none;
-      margin-top: 40%;
+      margin-top: 2rem;
       padding: 0;
+    }
+
+    @media screen and (min-width: 1024px){
+      .monthly-payment-values{
+        margin-top: 40%;
+      }
     }
     .monthly-payment-values li{
       margin-bottom: 2rem;
@@ -120,6 +160,7 @@
     }
     .monthly-payment-total{
       width: 100%;
+      margin-top: 2rem;
       text-align: center;
     }
     .test-container{
@@ -134,10 +175,17 @@
     }
 
     .test-container label{
-      display: inline-block;
-      width: 33%;
+      display: block;
+      width: 100%;
       padding: 1rem;
       background-color: #eee;
+    }
+
+    @media screen and (min-width: 1024px){
+      .test-container label{
+        display: inline-block;
+        width: 33%;
+      }
     }
     .test-container input{
       margin-left: .5rem;
@@ -201,9 +249,12 @@
       </div>
       <div class="mortgage-calc-results-panel">
         <h3>Estimated Monthly Payment</h3>
-        <div class="monthly-payment-chart">
+        <figure class="monthly-payment-chart">
           <canvas id="payment-chart" width="200" height="200"></canvas>
-        </div>
+          <figcaption class="monthly-payment-total">
+              {{ monthlyTotal|formatCurrency }} / month
+          </figcaption>
+        </figure>
         <div class="monthly-payment-legend">
           <ul class="monthly-payment-values">
             <li class="monthly-principal"><strong>Principal & Interest</strong>
@@ -212,7 +263,7 @@
             <li class="monthly-assessments"><strong>Assessments</strong>{{ monthlyAssessments|formatCurrency }}</li>
           </ul>
         </div>
-        <p class="monthly-payment-total">{{ monthlyTotal|formatCurrency }} / month</p>
+
       </div>
     </div>
   </section>
